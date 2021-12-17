@@ -4,7 +4,7 @@
    "type": "sqlite",
    "database": "data/dev.sqlite",
    "entities": [
-      "src/entity/**/*.ts"
+      "dist/**/*.entity{.ts,.js}"
    ],
    "migrations": [
       "src/migration/**/*.ts"
