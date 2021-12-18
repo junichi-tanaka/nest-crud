@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from '../entity/user.entity';
-import { CreateUserDTO } from './user.dto';
-import { InsertResult } from 'typeorm';
+import { CreateUserDTO, UpdateUserDTO } from './user.dto';
+import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 
 @Controller('user')
 export class UserController {
@@ -21,5 +21,18 @@ export class UserController {
     @Get(':id')
     async getUser(@Param('id') id: string): Promise<User> {
         return await this.service.find(Number(id));
+    }
+
+    @Put(':id/update')
+    async update(
+        @Param('id') id: string,
+        @Body() user: UpdateUserDTO,
+    ): Promise<UpdateResult> {
+        return await this.service.update(Number(id), user);
+    }
+
+    @Delete(':id')
+    async deleteUser(@Param('id') id: string): Promise<DeleteResult> {
+        return await this.service.delete(Number(id));
     }
 }
